@@ -1,7 +1,6 @@
-{
-    "name": "Leviathan",
-    "version": "3.5.1",
-    "description": "Testing",
+    "name": "Leviathan multi device",
+    "version": "1.0.0",
+    "description": "Simple Bot WhatsApp with Baileys Multi Device",
     "depecrated": false,
     "main": "index.js",
     "directories": {
@@ -13,6 +12,31 @@
         "start": "node index.js",
         "test": "node test.js",
         "test2": "nodemon index.js"
+    },
+    "keywords": [
+        "termux-whatsapp-bot",
+        "whatsapp-bot",
+        "whatsapp",
+        "js-whatsapp",
+        "whatsapp",
+        "mybot-md",
+        "family-md",
+        "family-bot",
+        "enjela",
+        "shiraori-md",
+        "stikerin",
+        "wabot-aq"
+    ],
+    "homepage": "https://github.com/radhin123/Leviathan-md",
+    "author": {
+        "name": "radhin123"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/radhin123/Leviathan-md.git"
+    },
+    "bugs": {
+        "url": "https://github.com/radhin123/Leviathan-md/issues"
     },
     "license": "GPL-3.0-or-later",
     "dependencies": {
