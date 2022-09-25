@@ -22,12 +22,12 @@
   <a href="https://github.com/radhin123"><img title="Author" src="https://img.shields.io/badge/Author-Radhin-blue.svg?style=for-the-badge&logo=github" /></a>
 </p>
 <p align="center">
-<a href="https://botcahx-rest-api.herokuapp.com"><img title="mengapi" 
+<a href="https://botcahx-rest-api.up.railway.app"><img title="mengapi" 
 src="https://img.shields.io/static/v1?label=click for&message=FREE Apikey&color=orange"></a>
-<!--<div>https://botcahx-rest-api.herokuapp.com/</div>-->
+<!--<div>https://botcahx-rest-api.up.railway.app</div>-->
 
   
-<a href="https://botcahx-rest-api.herokuapp.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fbotcahx-rest-api.herokuapp.com%2Fhit-counter&count_bg=%23E20D0D&title_bg=%230C15DB&icon=heroku.svg&icon_color=%23E7E7E7&title=Hits+Today&edge_flat=false"/></a>
+<a href="https://botcahx-rest-api.up.railway.app"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fbotcahx-rest-api.herokuapp.com%2Fhit-counter&count_bg=%23E20D0D&title_bg=%230C15DB&icon=heroku.svg&icon_color=%23E7E7E7&title=Hits+Today&edge_flat=false"/></a>
 <a href="https://visitor-badge.glitch.me/badge?page_id=radhin123/Leviathan-md"><img title="Visitor" src="https://visitor-badge.glitch.me/badge?page_id=radhin123/Leviathan-md"></a>
 <a href="https://github.com/radhin123/Leviathan-md/network/members"><img title="Forks" src="https://img.shields.io/github/forks/radhin123/Leviathan-md?label=Forks&color=blue&style=flat-square"></a>
 <a href="https://github.com/radhin123/Leviathan-md/watchers"><img title="Watchers" src="https://img.shields.io/github/watchers/radhin123/Leviathan-md?label=Watchers&color=green&style=flat-square"></a>
