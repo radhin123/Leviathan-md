@@ -1,7 +1,10 @@
+(async() => {
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
+process.on('uncaughtException', console.error);
 require('./config')
 const {
   useSingleFileAuthState,
+  useMultiFileAuthState,
   DisconnectReason
 } = require('@adiwajshing/baileys')
 const { generate } = require('qrcode-terminal')
@@ -14,6 +17,7 @@ const _ = require('lodash')
 const syntaxerror = require('syntax-error')
 const P = require('pino')
 const os = require('os')
+const chalk = require('chalk')
 let simple = require('./lib/simple')
 var low
 try {
@@ -22,7 +26,10 @@ try {
   low = require('./lib/lowdb')
 }
 const { Low, JSONFile } = low
-const mongoDB = require('./lib/mongoDB')
+const {
+	mongoDB,
+	MongoDBV2
+} = require('./lib/mongoDB')
 
 simple.protoType()
 
@@ -67,15 +74,16 @@ loadDatabase()
 // if (opts['cluster']) {
 //   require('./lib/cluster').Cluster()
 // }
-global.authFile = `${opts._[0] || 'session'}.json` /*this is sessions*/
-global.isInit = !fs.existsSync(authFile)
-const { state, saveState } = useSingleFileAuthState(global.authFile)
+const authF = opts['single'] ? `${opts._[0] || 'session'}.data.json` : 'sessions'
+global.isInit = !fs.existsSync(authF)
+const { state, saveState, saveCreds } = opts['single'] ? await useSingleFileAuthState(authF) : await useMultiFileAuthState(authF)
 
 const connectionOptions = {
   printQRInTerminal: true,
   auth: state,
   logger: P({ level: 'silent'}),
-  version: [2, 2204, 13]
+  version: [2, 2204, 13],
+  // browser: ['Family-MD', 'IOS', '4.1.0']
 }
 
 global.conn = simple.makeWASocket(connectionOptions)
@@ -89,17 +97,39 @@ if (!opts['test']) {
 if (opts['big-qr'] || opts['server']) conn.ev.on('qr', qr => generate(qr, { small: false }))
 if (opts['server']) require('./server')(global.conn, PORT)
 
-async function connectionUpdate(update) {
-  console.log(require('chalk').redBright('Mengaktifkan Bot, Harap tunggu sebentar...'))
+/* async function connectionUpdate(update) {
   const { connection, lastDisconnect } = update
+  if (connection == 'connecting') console.log(chalk.redBright('🕛 Mengaktifkan Bot, Harap tunggu sebentar...'))
+  if (connection == 'open') {
+      console.log(chalk.green('Connected✅'))
+      await conn.hehe("6281320170984@s.whatsapp.net", global.ftoli).catch(err => { return !0 })
+  }
+  if (connection == 'close') console.log(chalk.red('⏹️Koneksi berhenti dan mencoba menghubungkan kembali...'))
   global.timestamp.connect = new Date
   if (lastDisconnect && lastDisconnect.error && lastDisconnect.error.output && lastDisconnect.error.output.statusCode !== DisconnectReason.loggedOut && conn.ws.readyState !== WebSocket.CONNECTING) {
     console.log(global.reloadHandler(true))
   }
   if (global.db.data == null) await loadDatabase()
-//console.log(JSON.stringify(update, null, 4))
-}
+  //console.log(JSON.stringify(update, null, 4))
+} */
 
+// by rasel : bit.ly/AcellComel
+async function connectionUpdate(update) {
+  console.log(update)
+  const { receivedPendingNotifications, connection, lastDisconnect, isOnline, isNewLogin } = update
+  if (isNewLogin) conn.isInit = true
+  if (connection == 'connecting') console.log(chalk.redBright('⚡ Activate the Bot, please wait a moment...'))
+  if (connection == 'open') console.log(chalk.green('✅ Connected'))
+  if (isOnline == true) console.log(chalk.green('Status Online'))
+  if (isOnline == false) console.log(chalk.red('Status Offline'))
+  if (receivedPendingNotifications) console.log(chalk.yellow('Waiting New Messages'))
+  if (connection == 'close') console.log(chalk.red('⏱️ Connection stopped and tried to reconnect...'))
+  global.timestamp.connect = new Date
+  if (lastDisconnect && lastDisconnect.error && lastDisconnect.error.output && lastDisconnect.error.output.statusCode !== DisconnectReason.loggedOut && conn.ws.readyState !== WebSocket.CONNECTING) {
+    console.log(global.reloadHandler(true))
+  } 
+  if (global.db.data == null) await global.loadDatabase()
+}
 
 process.on('uncaughtException', console.error)
 // let strQuot = /(["'])(?:(?=(\\?))\2.)*?\1/
@@ -150,7 +180,7 @@ global.reloadHandler = function (restatConn) {
   conn.groupsUpdate = handler.groupsUpdate.bind(conn)
   conn.onDelete = handler.delete.bind(conn)
   conn.connectionUpdate = connectionUpdate.bind(conn)
-  conn.credsUpdate = saveState.bind(conn)
+  conn.credsUpdate = opts['single'] ? saveState.bind(conn) : saveCreds.bind(conn)
 
   conn.ev.on('messages.upsert', conn.handler)
   conn.ev.on('group-participants.update', conn.participantsUpdate)
@@ -244,4 +274,4 @@ async function _quickTest() {
 _quickTest()
   .then(() => conn.logger.info('Quick Test Done'))
   .catch(console.error)
-  
+  })()
