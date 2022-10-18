@@ -1,7 +1,7 @@
 {
-    "name": "Leviathan multi device",
+    "name": "Leviathan multi Auth",
     "version": "1.0.0",
-    "description": "Simple Bot WhatsApp with Baileys Multi Device",
+    "description": "Simple Bot WhatsApp with Baileys Multi Auth",
     "depecrated": false,
     "main": "index.js",
     "directories": {
@@ -98,7 +98,6 @@
         "xfarr-api": "^1.0.3",
         "yargs": "^17.2.1",
         "ikyy": "^5.0.7",
-        "yt-search": "^2.10.3",
         "yuzzu-api": "^1.0.2"
     }
 }
