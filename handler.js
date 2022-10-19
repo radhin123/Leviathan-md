@@ -618,14 +618,14 @@ module.exports = {
                         } finally {
                             text = (action === 'add' ? (chat.sWelcome || this.welcome || conn.welcome || 'Welcome, @user!').replace('@subject', await this.getName(id)).replace('@desc', groupMetadata.desc ? String.fromCharCode(8206).repeat(4001) + groupMetadata.desc : '') :
                                 (chat.sBye || this.bye || conn.bye || 'Bye, @user!')).replace(/@user/g, '@' + user.split`@`[0])
-                            let wel = API('hardianto', '/api/welcome3', {
+                            let wel = API('Ferdiz', '/api/canvas/welcome_v1', {
                                 profile: pp,
                                 name: await this.getName(user),
                                 bg: 'https://telegra.ph/file/0c7614657950e02908209.jpg',
                                 namegb: await this.getName(id),
                                 member: groupMetadata.participants.length
                             })
-                            let lea = API('hardianto', '/api/goodbye3', {
+                            let lea = API('Ferdiz', '/api/canvas/leav_v1', {
                                 profile: pp,
                                 name: await this.getName(user),
                                 bg: 'https://telegra.ph/file/0c7614657950e02908209.jpg',
