@@ -1,25 +1,19 @@
 let fetch = require('node-fetch')
-let axios = require('axios')
 let handler = async (m, { conn, args }) => {
-  if (!args[0]) throw 'Uhm...url nya mana?'
- // let url = `https://api.lolhuman.xyz/api/tiktokwm?apikey=9b817532fadff8fc7cb86862&url=${args[0]}`
-    m.reply(data.wait)
-await conn.reply(m.chat, `Downloading media from Tiktok`, 0, {
-  contextInfo: { mentionedJid: [m.sender],
-    externalAdReply :{
-    showAdAttribution: true,
-    mediaUrl: data.sc,
-    mediaType: 2,
-    description: data.deslink , 
-    title: run,
-    body: wm,
-    thumbnail: await(await fetch(img)).buffer(),
-    sourceUrl: data.sc
-     }}
-  })
-let txt = `🚀 *Link:* ${await(await axios.get(`https://tinyurl.com/api-create.php?url=${args[0]}`)).data}` 
-    await conn.send2ButtonVid(m.chat, `https://api.lolhuman.xyz/api/tiktokwm?apikey=9b817532fadff8fc7cb86862&url=${args[0]}` , txt, wm, `No Wm`, `.tiktoknowm ${args[0]}`, `Audio`, `.tiktokaudio ${args[0]}`, m)
+if (!args[0]) throw 'Uhm..url nya mana?'
+m.reply(wait)
+let res = await fetch(`https://botcahx.ddns.net/api/dowloader/tikok?url=${args[0]}`)
+if (!res.ok) throw await res.text()
+let json = await res.json()
+if (!json.status) throw json
+let { video, description, username } = json.result
+await conn.sendFile(m.chat, video, 'video.mp4', `
+\n💌 *Deskripsi*: ${description}
+\n\n📛 *Username*: ${username}
+\n\n🏢 *By*: Leviathan MD
+`, m, false, { contextInfo: { forwardingScore: 999, isForwarded: true }})
 }
+
 handler.help = ['tiktok'].map(v => v + ' <url>')
 handler.tags = ['downloader']
 
