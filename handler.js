@@ -636,7 +636,7 @@ module.exports = {
    await conn.sendButtonDoc(id, text, wm, action == 'add' ? 'selamat datang' : 'sampai jumpa', action === 'add' ? '.intro' : 'the.sad.boy01', fake,{
   contextInfo: { externalAdReply :{
     showAdAttribution: true,
-    mediaUrl: 'https://youtu.be/c-06tx4vusw',
+    mediaUrl: ''https://youtu.be/BhOWot4tu2o'',
     mediaType: 2,
     description: data.deslink , 
     title: run,
