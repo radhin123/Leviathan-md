@@ -1,6 +1,6 @@
 let limit = 30
 let fetch = require('node-fetch')
-const { servers, yta } = require('../lib/y2mate')
+/* const { servers, yta } = require('../lib/y2mate')
 let handler = async (m, { conn, args, isPrems, isOwner, usedPrefix, command }) => {
   if (!args || !args[0]) throw `contoh:\n${usedPrefix + command} https://www.youtube.com/watch?v=yxDdj_G9uRY`
   let chat = db.data.chats[m.chat]
@@ -22,7 +22,14 @@ let handler = async (m, { conn, args, isPrems, isOwner, usedPrefix, command }) =
         }
      }
   })
-}
+} */
+let fs = require('fs')
+let { youtubeSearch } = require ('@bochilteam/scraper')
+let handler = async (m, { conn, text, args, isPrems, isOwner, command }) => {
+  let vid = (await youtubeSearch(text)).video[0]
+  let { title, description, thumbnail, videoId, durationH, durationS, viewH, publishedTime } = vid
+  let url = 'https://www.youtube.com/watch?v=' + videoId
+let ytLink = `https://botcahx2.ddns.net/?url=${url}&filter=audioonly&quality=highestaudio&contenttype=audio/mpeg
 handler.help = ['mp3', 'a'].map(v => 'yt' + v + ` <url>`)
 handler.tags = ['downloader']
 handler.command = /^yt(a|mp3)$/i
